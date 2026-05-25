@@ -1,0 +1,19 @@
+{
+  "name": "tv-control-system",
+  "version": "1.0.0",
+  "description": "Sistema de Controle de TV em Tempo Real - Event-Driven Architecture",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.4.2"
+  }
+}
