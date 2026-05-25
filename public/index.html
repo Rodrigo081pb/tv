@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>?? Controle Remoto TV</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <h1>?? Controle Remoto</h1>
+      <div class="status" id="status">
+        <span class="dot"></span>
+        <span id="status-text">Desconectado</span>
+      </div>
+    </header>
+
+    <!-- Seção de Descoberta de TVs -->
+    <section class="discovery-section" id="discovery">
+      <h2>Conectar na TV</h2>
+      
+      <button class="btn btn-primary" id="scan-btn" onclick="scanTVs()">
+        ?? Buscar TVs na Rede
+      </button>
+      
+      <div id="tv-list" class="tv-list"></div>
+      
+      <div class="manual-entry">
+        <h3>Adicionar TV Manualmente</h3>
+        <input type="text" id="manual-ip" placeholder="IP da TV (ex: 192.168.1.100)" class="input">
+        <select id="manual-brand" class="input">
+          <option value="samsung">Samsung</option>
+          <option value="lg">LG webOS</option>
+          <option value="sony">Sony</option>
+          <option value="generic">Genérica</option>
+        </select>
+        <button class="btn btn-secondary" onclick="addManualTV()">Adicionar</button>
+      </div>
+    </section>
+
+    <!-- Seção do Controle Remoto -->
+    <section class="remote-section hidden" id="remote">
+      <div class="connected-tv">
+        <span id="connected-tv-name">TV Conectada</span>
+        <button class="btn-disconnect" onclick="disconnect()">Desconectar</button>
+      </div>
+
+      <!-- Botão Power -->
+      <div class="power-section">
+        <button class="btn-power" onclick="sendCmd('power')">?</button>
+      </div>
+
+      <!-- Navegação Direcional -->
+      <div class="dpad">
+        <button class="dpad-btn dpad-up" onclick="sendCmd('up')">?</button>
+        <button class="dpad-btn dpad-left" onclick="sendCmd('left')">?</button>
+        <button class="dpad-btn dpad-center" onclick="sendCmd('enter')">OK</button>
+        <button class="dpad-btn dpad-right" onclick="sendCmd('right')">?</button>
+        <button class="dpad-btn dpad-down" onclick="sendCmd('down')">?</button>
+      </div>
+
+      <!-- Botões de Navegação -->
+      <div class="nav-buttons">
+        <button class="btn btn-nav" onclick="sendCmd('back')">? Voltar</button>
+        <button class="btn btn-nav" onclick="sendCmd('home')">?? Home</button>
+        <button class="btn btn-nav" onclick="sendCmd('menu')">? Menu</button>
+      </div>
+
+      <!-- Volume -->
+      <div class="volume-section">
+        <h3>?? Volume</h3>
+        <div class="volume-controls">
+          <button class="btn btn-volume" onclick="sendCmd('volume_down')">?</button>
+          <button class="btn btn-volume" onclick="sendCmd('mute')">??</button>
+          <button class="btn btn-volume" onclick="sendCmd('volume_up')">+</button>
+        </div>
+      </div>
+
+      <!-- Canais -->
+      <div class="channel-section">
+        <h3>?? Canais</h3>
+        <div class="channel-controls">
+          <button class="btn btn-channel" onclick="sendCmd('channel_up')">CH ?</button>
+          <button class="btn btn-channel" onclick="sendCmd('channel_down')">CH ?</button>
+        </div>
+      </div>
+
+      <!-- Teclado Numérico -->
+      <div class="numpad">
+        <button class="btn-num" onclick="sendCmd('1')">1</button>
+        <button class="btn-num" onclick="sendCmd('2')">2</button>
+        <button class="btn-num" onclick="sendCmd('3')">3</button>
+        <button class="btn-num" onclick="sendCmd('4')">4</button>
+        <button class="btn-num" onclick="sendCmd('5')">5</button>
+        <button class="btn-num" onclick="sendCmd('6')">6</button>
+        <button class="btn-num" onclick="sendCmd('7')">7</button>
+        <button class="btn-num" onclick="sendCmd('8')">8</button>
+        <button class="btn-num" onclick="sendCmd('9')">9</button>
+        <button class="btn-num" onclick="sendCmd('source')">?</button>
+        <button class="btn-num" onclick="sendCmd('0')">0</button>
+        <button class="btn-num" onclick="sendCmd('back')">?</button>
+      </div>
+    </section>
+
+    <!-- Loading overlay -->
+    <div class="loading-overlay hidden" id="loading">
+      <div class="spinner"></div>
+      <p>Aguarde...</p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
