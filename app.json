@@ -22,8 +22,7 @@
     },
     "android": {
       "package": "com.smartremote.app",
-      "versionCode": 1,
-      "usesCleartextTraffic": true,
+      "versionCode": 2,
       "permissions": [
         "INTERNET",
         "ACCESS_NETWORK_STATE",
@@ -35,7 +34,15 @@
       ]
     },
     "plugins": [
-      "expo-location"
+      "expo-location",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          }
+        }
+      ]
     ],
     "extra": {
       "eas": {
