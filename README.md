@@ -1,233 +1,70 @@
-# ?? Controle Remoto Virtual para TV
+# SmartRemote
 
-Controle sua TV via Wi-Fi usando o navegador do seu celular ou computador. **Sem anúncios!** ??
+Aplicativo mobile em React Native com Expo para controlar Smart TVs na mesma rede Wi-Fi local. O app busca dispositivos automaticamente, conecta pelo protocolo correspondente e exibe uma interface escura inspirada em um controle remoto físico.
 
-## ?? Sobre o Projeto
+## Funcionalidades
 
-Aplicação web que transforma seu dispositivo em um controle remoto universal para Smart TVs. Conecte-se à sua TV pela mesma rede Wi-Fi e controle tudo pelo navegador.
+- Permissao de rede/localizacao para descobrir o IP do celular.
+- Varredura automatica da sub-rede local de `.1` a `.254`.
+- Probes para Samsung, LG webOS, Roku, Philips e Sony BRAVIA.
+- Controladores separados por fabricante com factory unificada.
+- Reconexao/heartbeat em segundo plano.
+- Controle visual sem toast, snackbar ou alerta apos comandos.
+- Feedback apenas por escala do botao e haptico leve.
 
-### ?? Por que usar?
-- ? **Sem anúncios** - Diferente dos apps da Play Store
-- ? **Gratuito e open-source**
-- ? **Funciona no navegador** - Não precisa instalar app
-- ? **Compatível com múltiplas marcas** - Samsung, LG, Sony, etc.
-- ? **Interface moderna e responsiva**
-
-## ? Funcionalidades
-
-### ?? Controle Completo
-- ? **Power** - Liga/Desliga a TV
-- ?? **Navegação Direcional** - D-Pad (? ? ? ? OK)
-- ?? **Volume** - Aumentar, Diminuir, Mute
-- ?? **Canais** - Trocar canais (CH+ / CH-)
-- ?? **Teclado Numérico** - Números 0-9
-- ?? **Botões Especiais** - Home, Menu, Voltar, Source
-
-### ?? Descoberta Automática
-- Busca automática de TVs na rede
-- Adicionar TV manualmente por IP
-- Suporte para múltiplas marcas
-
-### ?? TVs Suportadas
-- **Samsung** (Tizen OS) - via Samsung TV Control API
-- **LG** (webOS) - via webOS API
-- **Sony, Philips, TCL, Hisense** - modo genérico
-- **Android TV** - suporte básico
-
-## ?? Como Usar
-
-### 1?? Instalação
+## Como Rodar
 
 ```bash
-# Clone o repositório
-git clone https://github.com/Rodrigo081pb/tv.git
-cd tv
-
-# Instale as dependências
 npm install
-
-# Inicie o servidor
 npm start
 ```
 
-### 2?? Acesso
-
-**No Computador:**
-```
-http://localhost:3000
-```
-
-**No Celular (mesma rede Wi-Fi):**
-```
-http://[IP-DO-SEU-PC]:3000
-```
-
-?? **Como descobrir o IP do seu PC:**
-- Windows: `ipconfig` no CMD
-- Linux/Mac: `ifconfig` no Terminal
-- Exemplo: `http://192.168.1.100:3000`
-
-### 3?? Conectar na TV
-
-1. **Certifique-se que a TV e o dispositivo estão na mesma rede Wi-Fi**
-2. Abra a aplicação no navegador
-3. Clique em **"Buscar TVs na Rede"**
-4. Selecione sua TV na lista
-5. Clique em **"Conectar"**
-
-**Ou adicione manualmente:**
-1. Digite o IP da sua TV
-2. Selecione a marca
-3. Clique em "Adicionar"
-
-?? **Como descobrir o IP da TV:**
-- Samsung: Configurações ? Rede ? Status da Rede
-- LG: Configurações ? Rede ? Conexão Wi-Fi
-- Sony: Configurações ? Rede ? Configurações de Rede
-
-## ??? Arquitetura Técnica
-
-```
-???????????????????
-?   Frontend      ?  ? Interface Web (HTML/CSS/JS)
-?   (Navegador)   ?
-???????????????????
-         ? WebSocket
-???????????????????
-?   Backend       ?  ? Servidor Node.js + Express
-?   (Node.js)     ?
-???????????????????
-         ? API/Protocolo
-???????????????????
-?   Smart TV      ?  ? Samsung/LG/Sony TV
-???????????????????
-```
-
-### Tecnologias Utilizadas
-
-**Backend:**
-- Node.js + Express
-- WebSocket (ws)
-- SSDP (descoberta de dispositivos)
-- samsung-tv-control (API Samsung)
-- lgtv2 (API LG webOS)
-
-**Frontend:**
-- HTML5 / CSS3 / JavaScript Vanilla
-- WebSocket Client
-- Design Responsivo
-
-## ?? Requisitos
-
-- **Node.js** 16+ instalado
-- **TV Smart** conectada na mesma rede Wi-Fi
-- **Navegador moderno** (Chrome, Firefox, Safari, Edge)
-
-## ?? Comandos Disponíveis
-
-| Comando | Descrição |
-|---------|-----------|
-| Power | Liga/Desliga a TV |
-| Volume +/- | Ajusta o volume |
-| Mute | Silencia/Ativa som |
-| Canal +/- | Troca de canal |
-| 0-9 | Números do controle |
-| ???? | Navegação direcional |
-| OK/Enter | Confirmar seleção |
-| Home | Tela inicial |
-| Menu | Menu da TV |
-| Voltar | Voltar/Retornar |
-| Source | Trocar fonte de entrada |
-
-## ?? Configuração Avançada
-
-### Porta do Servidor
-
-Altere a porta editando `server.js`:
-
-```javascript
-const PORT = process.env.PORT || 3000;
-```
-
-Ou use variável de ambiente:
-```bash
-PORT=8080 npm start
-```
-
-### Adicionar Suporte a Outras TVs
-
-Edite `server.js` e adicione o protocolo específico da marca no objeto `TV_BRANDS` e nas funções de comando.
-
-## ?? Solução de Problemas
-
-### TV não aparece na busca
-- ? Verifique se a TV está ligada e conectada no Wi-Fi
-- ? Confirme que está na mesma rede
-- ? Tente adicionar manualmente pelo IP
-- ? Algumas TVs precisam ativar "Controle Remoto via Rede" nas configurações
-
-### Não consegue conectar
-- ? Firewall pode estar bloqueando - libere as portas 3000, 8001, 8002
-- ? Samsung: Aceite a permissão que aparece na tela da TV
-- ? LG: Aceite a autorização no primeiro pareamento
-
-### Comandos não funcionam
-- ? Verifique se a TV está no modo correto
-- ? Algumas funções podem não estar disponíveis em modo genérico
-- ? Reinicie a conexão
-
-## ?? Mobile-First
-
-A interface foi desenvolvida pensando no uso mobile, com:
-- Botões grandes e fáceis de pressionar
-- Design responsivo
-- Feedback tátil e visual
-- Sem necessidade de zoom
-
-## ?? Segurança
-
-- Conexão local (não expõe dados para internet)
-- Sem coleta de informações
-- Código aberto e auditável
-- Sem rastreamento ou anúncios
-
-## ?? Deploy em Produção
-
-Para uso permanente, você pode:
-
-1. **Raspberry Pi** - Deixe rodando 24/7
-2. **Servidor Local** - Use PM2 para manter rodando
-3. **Docker** - Container isolado
+Depois, abra no Expo Go ou em um emulador com:
 
 ```bash
-# Com PM2
-npm install -g pm2
-pm2 start server.js --name "tv-remote"
-pm2 save
-pm2 startup
+npm run android
+npm run ios
 ```
 
-## ?? Contribuindo
+O celular e a TV precisam estar na mesma rede Wi-Fi. O app nao depende de internet para controlar a TV, apenas da rede local.
 
-Contribuições são bem-vindas! Sinta-se livre para:
-- Reportar bugs
-- Sugerir novos recursos
-- Enviar pull requests
-- Melhorar a documentação
+### Comandos Uteis
 
-## ?? Licença
+```bash
+npm run start:clear
+npm run lan
+npm run lan:clear
+npm run tunnel
+npm run web
+```
 
-MIT - Uso livre para projetos pessoais e comerciais
+- Use `npm run start:clear` quando o Metro avisar que houve mudanca no `babel.config.js` ou pedir cache limpo.
+- Use `npm run lan` ou `npm run lan:clear` para abrir pelo Expo Go usando a rede Wi-Fi local, sem ngrok.
+- Use `npm run tunnel` se o QR Code aparecer como `127.0.0.1` ou se o celular nao conseguir abrir o app pela rede local.
+- Em redes corporativas, o tunnel pode falhar com timeout do ngrok. Nesse caso, prefira `npm run lan:clear` e garanta que celular e computador estejam no mesmo Wi-Fi.
+- Use `npm run web` para testar no navegador. O projeto inclui `react-native-web`, `react-dom` e `@expo/metro-runtime` no `package.json`; rode `npm install` depois de atualizar dependencias.
 
-## ?? Créditos
+### Android SDK / adb
 
-Bibliotecas utilizadas:
-- [samsung-tv-control](https://github.com/Toxblh/samsung-tv-control)
-- [lgtv2](https://github.com/hobbyquaker/lgtv2)
-- [node-ssdp](https://github.com/diversario/node-ssdp)
+O comando `npm run android` tenta abrir um emulador ou dispositivo Android via `adb`. Se aparecer erro de Android SDK, ha duas opcoes:
 
----
+1. Abrir pelo Expo Go no celular escaneando o QR Code do `npm start` ou `npm run tunnel`.
+2. Instalar o Android Studio, instalar o Android SDK e configurar `ANDROID_HOME` apontando para a pasta do SDK, alem de adicionar `platform-tools` ao `PATH`.
 
-**Desenvolvido com ?? para quem está cansado de anúncios em apps de controle remoto!**
+## Estrutura
 
-?? **Dica:** Adicione um atalho na tela inicial do celular para acesso rápido!
+```text
+src/
+  components/
+  context/
+  hooks/
+  navigation/
+  screens/
+  services/
+```
+
+## Observacoes de Plataforma
+
+- No iOS, a permissao de rede local e acionada pelo proprio sistema quando o app tenta acessar dispositivos da LAN.
+- Em TVs Samsung e LG, o primeiro pareamento pode exigir confirmacao na tela da TV.
+- Alguns fabricantes/modelos mudam portas, endpoints ou comandos; nesses casos, as falhas de comando sao registradas apenas no console, sem feedback visual para o usuario.
